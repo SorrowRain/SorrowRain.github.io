@@ -12,15 +12,15 @@
 
   <link rel="shortcut icon" href="/images/favicon.png">
   <link rel="alternate" href="/atom.xml" title="SorrowRain的博客" type="application/atom+xml">
-  <meta name="description" content="笔者默认读者有一定的逆向能力及面向对象编程能力*，将不对部分专业词汇进行解释本文适合没有Android开发经验的CTF逆向初学者阅读">
+  <meta name="description" content="笔者默认读者有一定的逆向能力及面向对象编程能力，将不对部分专业词汇进行解释本文适合没有Android开发经验的CTF逆向初学者阅读对于CTF初学者而言，入门Android逆向必定是十分痛苦的一个过程：   Apk文件该怎么打开？里面有什么结构？ Android系统是怎么运行Apk文件的？和Windows PE文件差不多吗？ Android的主流开发语言是Java或Kotlin，但我只学了C，看不">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android逆向入门杂谈（一）">
 <meta property="og:url" content="http://blog.sorrowrain.com/Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%9D%82%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
 <meta property="og:site_name" content="SorrowRain的博客">
-<meta property="og:description" content="笔者默认读者有一定的逆向能力及面向对象编程能力*，将不对部分专业词汇进行解释本文适合没有Android开发经验的CTF逆向初学者阅读">
+<meta property="og:description" content="笔者默认读者有一定的逆向能力及面向对象编程能力，将不对部分专业词汇进行解释本文适合没有Android开发经验的CTF逆向初学者阅读对于CTF初学者而言，入门Android逆向必定是十分痛苦的一个过程：   Apk文件该怎么打开？里面有什么结构？ Android系统是怎么运行Apk文件的？和Windows PE文件差不多吗？ Android的主流开发语言是Java或Kotlin，但我只学了C，看不">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-08-12T11:23:40.000Z">
-<meta property="article:modified_time" content="2021-08-12T11:38:44.463Z">
+<meta property="article:modified_time" content="2021-08-12T12:13:06.927Z">
 <meta property="article:author" content="SorrowRain">
 <meta property="article:tag" content="Android Reverse">
 <meta name="twitter:card" content="summary">
@@ -66,7 +66,7 @@
     <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="mdui-icon material-icons">menu</i></a>
     <a href="/" class="mdui-typo-headline">SorrowRain的博客</a>
     <div class="mdui-toolbar-spacer"></div>
-    <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
+    <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'Search'}"><i class="mdui-icon material-icons">search</i></a>
     <a href="/atom.xml" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: 'RSS'}"><i class="mdui-icon material-icons">rss_feed</i></a>
   </div>
 </header>
@@ -97,13 +97,13 @@
   <div class="mdui-list" mdui-collapse="{accordion: true}">
     <a href="/" class="mdui-list-item mdui-ripple">
       <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">home</i>
-      <div class="mdui-list-item-content">主页</div>
+      <div class="mdui-list-item-content">Home</div>
     </a>
     <div class="mdui-collapse-item">
       <script>var a=localStorage.getItem("mdui-collapse-item-0");if(a){document.getElementsByClassName("mdui-collapse-item")[0].className+=" mdui-collapse-item-open"};</script>
       <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
         <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-deep-orange">archive</i>
-        <div class="mdui-list-item-content">归档</div>
+        <div class="mdui-list-item-content">Archive</div>
         <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
       </div>
       <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
@@ -116,14 +116,14 @@
       <script>var a=localStorage.getItem("mdui-collapse-item-1");if(a){document.getElementsByClassName("mdui-collapse-item")[1].className+=" mdui-collapse-item-open"};</script>
       <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
         <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-green">class</i>
-        <div class="mdui-list-item-content">分类</div>
+        <div class="mdui-list-item-content">Category</div>
         <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
       </div>
       <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
         
         
         
-          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">分类为空</a>
+          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">No Categories</a>
         
       </div>
     </div>
@@ -131,7 +131,7 @@
       <script>var a=localStorage.getItem("mdui-collapse-item-2");if(a){document.getElementsByClassName("mdui-collapse-item")[2].className+=" mdui-collapse-item-open"};</script>
       <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
         <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-brown">bookmark</i>
-        <div class="mdui-list-item-content">标签</div>
+        <div class="mdui-list-item-content">Tag</div>
         <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
       </div>
       <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
@@ -142,7 +142,7 @@
     </div>
     <a href="/about" class="mdui-list-item mdui-ripple">
       <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-purple">person</i>
-      <div class="mdui-list-item-content">关于</div>
+      <div class="mdui-list-item-content">About</div>
     </a>
   </div>
 
@@ -153,13 +153,13 @@
     <div class="mdui-collapse-item">
       <script>var a=localStorage.getItem("mdui-collapse-item-3");if(a){document.getElementsByClassName("mdui-collapse-item")[3].className+=" mdui-collapse-item-open"};</script>
       <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-        <div class="mdui-list-item-content">友情链接</div>
+        <div class="mdui-list-item-content">Links</div>
         <i class="mdui-list-item-icon mdui-icon material-icons">link</i>
       </div>
       <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
         
         
-          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">链接为空</a>
+          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">No Links</a>
         
       </div>
     </div>
@@ -172,7 +172,7 @@
   <style>#main article .mdui-card-content .center-block{display:block!important;margin-right:auto!important;margin-left:auto!important}</style>
   <article class="mdui-card mdui-m-b-5">
     <header class="mdui-card-media">
-      <img src="/images/random/material-12.png" style="max-height: 240px;">
+      <img src="/images/random/material-5.png" style="max-height: 240px;">
       <div class="mdui-card-media-covered">
         <div class="mdui-card-primary">
           <div class="mdui-card-primary-title">Android逆向入门杂谈（一）</div>
@@ -197,25 +197,25 @@
           <button class="mdui-btn mdui-btn-icon mdui-text-color-white" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="mdui-icon material-icons">share</i></button>
           <ul class="mdui-menu" id="share_menu">
             <li class="mdui-menu-item">
-              <a href="http://service.weibo.com/share/share.php?appkey=&title=Android逆向入门杂谈（一）&url=http://blog.sorrowrain.com/Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%9D%82%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/&pic=http://blog.sorrowrain.com/images/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
+              <a href="http://service.weibo.com/share/share.php?appkey=&title=Android逆向入门杂谈（一）&url=http://blog.sorrowrain.com/Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%9D%82%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/&pic=http://blog.sorrowrain.com/images/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://twitter.com/intent/tweet?text=Android逆向入门杂谈（一）&url=http://blog.sorrowrain.com/Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%9D%82%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/&via=SorrowRain" target="_blank" class="mdui-ripple">分享到 Twitter</a>
+              <a href="https://twitter.com/intent/tweet?text=Android逆向入门杂谈（一）&url=http://blog.sorrowrain.com/Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%9D%82%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/&via=SorrowRain" target="_blank" class="mdui-ripple">Share to Twitter</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.facebook.com/sharer/sharer.php?u=http://blog.sorrowrain.com/Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%9D%82%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=http://blog.sorrowrain.com/Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%9D%82%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/" target="_blank" class="mdui-ripple">Share to Facebook</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://plus.google.com/share?url=http://blog.sorrowrain.com/Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%9D%82%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/" target="_blank" class="mdui-ripple">分享到 Google+</a>
+              <a href="https://plus.google.com/share?url=http://blog.sorrowrain.com/Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%9D%82%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/" target="_blank" class="mdui-ripple">Share to Google+</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://blog.sorrowrain.com/Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%9D%82%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/&title=Android逆向入门杂谈（一）" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
+              <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://blog.sorrowrain.com/Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%9D%82%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/&title=Android逆向入门杂谈（一）" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="http://connect.qq.com/widget/shareqq/index.html?site=SorrowRain的博客&title=Android逆向入门杂谈（一）&pics=http://blog.sorrowrain.com/images/favicon.png&url=http://blog.sorrowrain.com/Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%9D%82%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/" target="_blank" class="mdui-ripple">分享到 QQ</a>
+              <a href="http://connect.qq.com/widget/shareqq/index.html?site=SorrowRain的博客&title=Android逆向入门杂谈（一）&pics=http://blog.sorrowrain.com/images/favicon.png&url=http://blog.sorrowrain.com/Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%9D%82%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/" target="_blank" class="mdui-ripple">Share to QQ</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://telegram.me/share/url?url=http://blog.sorrowrain.com/Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%9D%82%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/&text=Android逆向入门杂谈（一）" target="_blank" class="mdui-ripple">分享到 Telegram</a>
+              <a href="https://telegram.me/share/url?url=http://blog.sorrowrain.com/Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%9D%82%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/&text=Android逆向入门杂谈（一）" target="_blank" class="mdui-ripple">Share to Telegram</a>
             </li>
           </ul>
         
@@ -223,12 +223,28 @@
     </header>
     <div class="mdui-card-content mdui-typo">
       <blockquote>
-<h4 id="笔者默认读者有一定的逆向能力及面向对象编程能力-，将不对部分专业词汇进行解释"><a href="#笔者默认读者有一定的逆向能力及面向对象编程能力-，将不对部分专业词汇进行解释" class="headerlink" title="笔者默认读者有一定的逆向能力及面向对象编程能力*，将不对部分专业词汇进行解释"></a><em>笔者默认读者有一定的</em><em><strong>逆向能力</strong></em><em>及</em><em><strong>面向对象编程能力</strong></em>*，将不对部分专业词汇进行解释</h4><h4 id="本文适合没有Android开发经验的CTF逆向初学者阅读"><a href="#本文适合没有Android开发经验的CTF逆向初学者阅读" class="headerlink" title="本文适合没有Android开发经验的CTF逆向初学者阅读"></a><em>本文适合</em><em><strong>没有Android开发经验</strong></em><em>的CTF逆向初学者阅读</em></h4></blockquote>
-
+<h4 id="笔者默认读者有一定的逆向能力及面向对象编程能力，将不对部分专业词汇进行解释"><a href="#笔者默认读者有一定的逆向能力及面向对象编程能力，将不对部分专业词汇进行解释" class="headerlink" title="笔者默认读者有一定的逆向能力及面向对象编程能力，将不对部分专业词汇进行解释"></a><em>笔者默认读者有一定的</em><em><strong>逆向能力</strong></em><em>及</em><em><strong>面向对象编程能力</strong></em>，<em>将不对部分专业词汇进行解释</em></h4><h4 id="本文适合没有Android开发经验的CTF逆向初学者阅读"><a href="#本文适合没有Android开发经验的CTF逆向初学者阅读" class="headerlink" title="本文适合没有Android开发经验的CTF逆向初学者阅读"></a><em>本文适合</em><em><strong>没有Android开发经验</strong></em><em>的CTF逆向初学者阅读</em></h4><p>对于CTF初学者而言，入门Android逆向必定是十分痛苦的一个过程：</p>
+</blockquote>
+<ul>
+<li>Apk文件该怎么打开？里面有什么结构？</li>
+<li>Android系统是怎么运行Apk文件的？和Windows PE文件差不多吗？</li>
+<li>Android的主流开发语言是Java或Kotlin，但我只学了C，看不懂代码怎么办？</li>
+<li>Native层是什么？在逆向过程中有什么用？</li>
+</ul>
+<p>这是笔者在入门Android逆向时遇到的问题，相信也是很多初学者遇到的问题</p>
+<p>希望能通过这一系列文章，帮助初学者了解安卓和安卓逆向，能愉快的面对CTF题目</p>
+<p>如果想深入学习安卓逆向，还是推荐学习一下Android开发知识，能对逆向学习起到很大的帮助</p>
+<p>那么，我们先从了解安卓开始吧</p>
+<h2 id="一-认识Android"><a href="#一-认识Android" class="headerlink" title="一. 认识Android"></a>一. 认识Android</h2><p>Android是一种基于Linux 内核和其他开源软件的修改版本的移动操作系统，由一个被称为开放手机联盟的开发者联盟开发的，并由Google 提供商业赞助。</p>
+<p>Android是免费的开源软件，其源代码被称为 <a target="_blank" rel="noopener" href="https://source.android.com/">Android 开源项目 (AOSP)</a>，主要根据Apache 许可证获得许可。</p>
+<p><a href="./android_stack_480.png">AndroidStack</a></p>
+<p>上图是Android系统架构的示意图，虽然看起来很复杂，但简而言之，你可以将Android理解为运行在Linux上的一种操作系统。工程师们在Linux上写了一个名为ART（Android Runtime）的虚拟机，用于运行安卓软件。</p>
+<p>手机厂商们也对Android进行了修改，你耳熟能详的MIUI，鸿蒙OS，Flyme等手机系统其实都是Android。</p>
+<h2 id="二-认识Apk"><a href="#二-认识Apk" class="headerlink" title="二. 认识Apk"></a>二. 认识Apk</h2>
       
       <blockquote>
         
-        <strong>本文链接：</strong><br><a href="http://blog.sorrowrain.com/Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%9D%82%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/">http://blog.sorrowrain.com/Android逆向入门杂谈（一）/</a>
+        <strong>PermaLink: </strong><br><a href="http://blog.sorrowrain.com/Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%9D%82%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/">http://blog.sorrowrain.com/Android逆向入门杂谈（一）/</a>
       </blockquote>
     </div>
     <footer class="mdui-card-actions">
@@ -251,7 +267,7 @@
     <div class="spacer"></div>
     
       <a rel="next" class="extend next" href="/helloworld/">
-        <span class="mdui-p-x-3" mdui-tooltip="{content: '开张！'}">下一篇</span>
+        <span class="mdui-p-x-3" mdui-tooltip="{content: '开张！'}">Next</span>
         <button aria-label="next" class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_forward</i></button>
       </a>
     
