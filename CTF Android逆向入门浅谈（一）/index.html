@@ -8,25 +8,25 @@
   <meta name="renderer" content="webkit">
 
   
-  <title>CTF Android逆向入门浅谈 | SorrowRain的博客</title>
+  <title>CTF Android逆向入门浅谈（一） | SorrowRain的博客</title>
 
   <link rel="shortcut icon" href="/images/favicon.png">
   <link rel="alternate" href="/atom.xml" title="SorrowRain的博客" type="application/atom+xml">
   <meta name="description" content="笔者默认读者有一定的逆向能力及面向对象编程能力，将不对部分专业词汇进行解释本文适合没有Android开发经验的CTF逆向初学者阅读 对于CTF初学者而言，入门Android逆向必定是十分痛苦的一个过程：  如何打开Apk文件？Apk是二进制文件吗？ Android系统是怎么运行Apk文件的？和Windows PE文件差不多吗？ Android的主流开发语言是Java或Kotlin，但我只学了C，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CTF Android逆向入门浅谈">
-<meta property="og:url" content="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88/index.html">
+<meta property="og:title" content="CTF Android逆向入门浅谈（一）">
+<meta property="og:url" content="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
 <meta property="og:site_name" content="SorrowRain的博客">
 <meta property="og:description" content="笔者默认读者有一定的逆向能力及面向对象编程能力，将不对部分专业词汇进行解释本文适合没有Android开发经验的CTF逆向初学者阅读 对于CTF初学者而言，入门Android逆向必定是十分痛苦的一个过程：  如何打开Apk文件？Apk是二进制文件吗？ Android系统是怎么运行Apk文件的？和Windows PE文件差不多吗？ Android的主流开发语言是Java或Kotlin，但我只学了C，">
 <meta property="og:locale">
-<meta property="og:image" content="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88/android_stack_480.png">
-<meta property="og:image" content="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88/normal6_filetree.png">
+<meta property="og:image" content="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/android_stack_480.png">
+<meta property="og:image" content="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/normal6_filetree.png">
 <meta property="article:published_time" content="2021-08-12T11:23:40.000Z">
-<meta property="article:modified_time" content="2021-10-07T10:24:48.841Z">
+<meta property="article:modified_time" content="2021-10-07T10:27:31.775Z">
 <meta property="article:author" content="SorrowRain">
 <meta property="article:tag" content="Android Reverse">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88/android_stack_480.png">
+<meta name="twitter:image" content="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/android_stack_480.png">
 
   <meta name="keywords" content=",Android Reverse">
   <meta name="format-detection" content="telephone=no,email=no">
@@ -34,7 +34,7 @@
 
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="application-name" content="SorrowRain的博客">
-  <meta name="msapplication-starturl" content="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88/">
+  <meta name="msapplication-starturl" content="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/">
   <meta name="msapplication-navbutton-color" content="#9C27B0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="SorrowRain的博客">
@@ -42,7 +42,7 @@
   <link rel="apple-touch-icon" href="/images/favicon.png">
 
   
-    <link rel="canonical" href="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88/">
+    <link rel="canonical" href="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/">
   
 
   
@@ -175,10 +175,10 @@
   <style>#main article .mdui-card-content .center-block{display:block!important;margin-right:auto!important;margin-left:auto!important}</style>
   <article class="mdui-card mdui-m-b-5">
     <header class="mdui-card-media">
-      <img src="/images/random/material-6.png" style="max-height: 240px;">
+      <img src="/images/random/material-1.png" style="max-height: 240px;">
       <div class="mdui-card-media-covered">
         <div class="mdui-card-primary">
-          <div class="mdui-card-primary-title">CTF Android逆向入门浅谈</div>
+          <div class="mdui-card-primary-title">CTF Android逆向入门浅谈（一）</div>
           <div class="mdui-card-primary-subtitle"><i class="iconfont">&#xe697;</i> 2021-08-12 / <i class="iconfont">&#xe601;</i> SorrowRain</div>
         </div>
       </div>
@@ -191,7 +191,7 @@
             
             <li class="mdui-menu-item" disabled>
               
-                <img src="https://chart.googleapis.com/chart?cht=qr&chs=246x246&chl=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88/&chld=M|2">
+                <img src="https://chart.googleapis.com/chart?cht=qr&chs=246x246&chl=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/&chld=M|2">
               
             </li>
           </ul>
@@ -200,25 +200,25 @@
           <button class="mdui-btn mdui-btn-icon mdui-text-color-white" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="mdui-icon material-icons">share</i></button>
           <ul class="mdui-menu" id="share_menu">
             <li class="mdui-menu-item">
-              <a href="http://service.weibo.com/share/share.php?appkey=&title=CTF Android逆向入门浅谈&url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88/&pic=http://blog.sorrowrain.com/images/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
+              <a href="http://service.weibo.com/share/share.php?appkey=&title=CTF Android逆向入门浅谈（一）&url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/&pic=http://blog.sorrowrain.com/images/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://twitter.com/intent/tweet?text=CTF Android逆向入门浅谈&url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88/&via=SorrowRain" target="_blank" class="mdui-ripple">Share to Twitter</a>
+              <a href="https://twitter.com/intent/tweet?text=CTF Android逆向入门浅谈（一）&url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/&via=SorrowRain" target="_blank" class="mdui-ripple">Share to Twitter</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.facebook.com/sharer/sharer.php?u=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88/" target="_blank" class="mdui-ripple">Share to Facebook</a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/" target="_blank" class="mdui-ripple">Share to Facebook</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://plus.google.com/share?url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88/" target="_blank" class="mdui-ripple">Share to Google+</a>
+              <a href="https://plus.google.com/share?url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/" target="_blank" class="mdui-ripple">Share to Google+</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88/&title=CTF Android逆向入门浅谈" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
+              <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/&title=CTF Android逆向入门浅谈（一）" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="http://connect.qq.com/widget/shareqq/index.html?site=SorrowRain的博客&title=CTF Android逆向入门浅谈&pics=http://blog.sorrowrain.com/images/favicon.png&url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88/" target="_blank" class="mdui-ripple">Share to QQ</a>
+              <a href="http://connect.qq.com/widget/shareqq/index.html?site=SorrowRain的博客&title=CTF Android逆向入门浅谈（一）&pics=http://blog.sorrowrain.com/images/favicon.png&url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/" target="_blank" class="mdui-ripple">Share to QQ</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://telegram.me/share/url?url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88/&text=CTF Android逆向入门浅谈" target="_blank" class="mdui-ripple">Share to Telegram</a>
+              <a href="https://telegram.me/share/url?url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/&text=CTF Android逆向入门浅谈（一）" target="_blank" class="mdui-ripple">Share to Telegram</a>
             </li>
           </ul>
         
@@ -274,7 +274,7 @@
       
       <blockquote>
         
-        <strong>PermaLink: </strong><br><a href="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88/">http://blog.sorrowrain.com/CTF Android逆向入门浅谈/</a>
+        <strong>PermaLink: </strong><br><a href="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/">http://blog.sorrowrain.com/CTF Android逆向入门浅谈（一）/</a>
       </blockquote>
     </div>
     <footer class="mdui-card-actions">
