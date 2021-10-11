@@ -4,13 +4,19 @@
   
     
     <entry>
-      <title></title>
+      <title>CTF Android逆向入门浅谈（二）</title>
       <link href="/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
       <url>/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<blockquote><h4 id="笔者默认读者有一定的逆向能力及面向对象编程能力，将不对部分专业词汇进行解释"><a href="#笔者默认读者有一定的逆向能力及面向对象编程能力，将不对部分专业词汇进行解释" class="headerlink" title="笔者默认读者有一定的逆向能力及面向对象编程能力，将不对部分专业词汇进行解释"></a><em>笔者默认读者有一定的</em><em><strong>逆向能力</strong></em><em>及</em><em><strong>面向对象编程能力</strong></em>，<em>将不对部分专业词汇进行解释</em></h4><h4 id="本文适合没有Android开发经验的CTF逆向初学者阅读"><a href="#本文适合没有Android开发经验的CTF逆向初学者阅读" class="headerlink" title="本文适合没有Android开发经验的CTF逆向初学者阅读"></a><em>本文适合</em><em><strong>没有Android开发经验</strong></em><em>的CTF逆向初学者阅读</em></h4></blockquote><p>上次聊了聊安卓与Apk，这次我们就来着手下逆向。</p><p>Android逆向大致分为Java层和Native层两层，我们先来说说Java层</p><h2 id="一-工具"><a href="#一-工具" class="headerlink" title="一. 工具"></a>一. 工具</h2><p>工欲善其事，必先利其器。</p><p>有多种工具可以反编译Dex文件，但我更推荐jeb</p><p>需要注意的是，jeb需要java环境。使用前请确保环境完备</p><p>无论是Kotlin还是Java，市面上的工具都会将其反编译为Java，放心使用即可</p><hr><p>使用jeb和使用IDA很像：拖入apk文件，jeb会自动读取并反编译为smali代码</p><p>你可以在右侧的bytecode层级树中切换你想查看的类，并使用tab键查看java代码</p><p><img src="./bytecode_tree.png" alt="BytecodeTree"></p><p>左上方的工程浏览器则是整个apk文件的架构，你可以查看Manifest，签名详情，apk资源等</p><p>当然，jeb的功能十分强大，随着学习的深入，你还会了解并使用到更多功能</p>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> Android Reverse </tag>
+            
+        </tags>
       
     </entry>
     
