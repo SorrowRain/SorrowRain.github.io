@@ -20,8 +20,10 @@
 <meta property="og:description" content="笔者默认读者有一定的逆向能力及面向对象编程能力，将不对部分专业词汇进行解释本文适合没有Android开发经验的CTF逆向初学者阅读 上次聊了聊安卓与Apk，这次我们就来着手下逆向。 Android逆向大致分为Java层和Native层两层，我们先来说说Java层 一. 工具工欲善其事，必先利其器。 有多种工具可以反编译Dex文件，但我更推荐jeb 需要注意的是，jeb需要java环境。使用前请确">
 <meta property="og:locale">
 <meta property="og:image" content="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/bytecode_tree.png">
+<meta property="og:image" content="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/bytecode_tree.png">
+<meta property="og:image" content="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/manifest.png">
 <meta property="article:published_time" content="2021-10-11T16:08:00.000Z">
-<meta property="article:modified_time" content="2021-10-11T16:33:48.362Z">
+<meta property="article:modified_time" content="2021-10-12T02:46:27.247Z">
 <meta property="article:author" content="SorrowRain">
 <meta property="article:tag" content="Android Reverse">
 <meta name="twitter:card" content="summary">
@@ -68,7 +70,7 @@
     <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="mdui-icon material-icons">menu</i></a>
     <a href="/" class="mdui-typo-headline">SorrowRain的博客</a>
     <div class="mdui-toolbar-spacer"></div>
-    <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
+    <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'Search'}"><i class="mdui-icon material-icons">search</i></a>
     <a href="/atom.xml" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: 'RSS'}"><i class="mdui-icon material-icons">rss_feed</i></a>
   </div>
 </header>
@@ -99,18 +101,18 @@
   <div class="mdui-list" mdui-collapse="{accordion: true}">
     <a href="/" class="mdui-list-item mdui-ripple">
       <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">home</i>
-      <div class="mdui-list-item-content">主页</div>
+      <div class="mdui-list-item-content">Home</div>
     </a>
     <div class="mdui-collapse-item">
       <script>var a=localStorage.getItem("mdui-collapse-item-0");if(a){document.getElementsByClassName("mdui-collapse-item")[0].className+=" mdui-collapse-item-open"};</script>
       <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
         <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-deep-orange">archive</i>
-        <div class="mdui-list-item-content">归档</div>
+        <div class="mdui-list-item-content">Archive</div>
         <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
       </div>
       <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
         
-        <a class="mdui-ripple sidebar_archives-link" href="/archives/2021/10/">October 2021<span class="mdui-ripple sidebar_archives-count">2</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2021/08/">August 2021<span class="mdui-ripple sidebar_archives-count">1</span></a>
+        <a class="mdui-ripple sidebar_archives-link" href="/archives/2021/10/">October 2021<span class="mdui-ripple sidebar_archives-count">3</span></a>
         
       </div>
     </div>
@@ -118,14 +120,14 @@
       <script>var a=localStorage.getItem("mdui-collapse-item-1");if(a){document.getElementsByClassName("mdui-collapse-item")[1].className+=" mdui-collapse-item-open"};</script>
       <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
         <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-green">class</i>
-        <div class="mdui-list-item-content">分类</div>
+        <div class="mdui-list-item-content">Category</div>
         <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
       </div>
       <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
         
         
         
-          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">分类为空</a>
+          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">No Categories</a>
         
       </div>
     </div>
@@ -133,7 +135,7 @@
       <script>var a=localStorage.getItem("mdui-collapse-item-2");if(a){document.getElementsByClassName("mdui-collapse-item")[2].className+=" mdui-collapse-item-open"};</script>
       <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
         <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-brown">bookmark</i>
-        <div class="mdui-list-item-content">标签</div>
+        <div class="mdui-list-item-content">Tag</div>
         <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
       </div>
       <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
@@ -144,7 +146,7 @@
     </div>
     <a href="/about" class="mdui-list-item mdui-ripple">
       <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-purple">person</i>
-      <div class="mdui-list-item-content">关于</div>
+      <div class="mdui-list-item-content">About</div>
     </a>
   </div>
 
@@ -155,13 +157,13 @@
     <div class="mdui-collapse-item">
       <script>var a=localStorage.getItem("mdui-collapse-item-3");if(a){document.getElementsByClassName("mdui-collapse-item")[3].className+=" mdui-collapse-item-open"};</script>
       <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-        <div class="mdui-list-item-content">友情链接</div>
+        <div class="mdui-list-item-content">Links</div>
         <i class="mdui-list-item-icon mdui-icon material-icons">link</i>
       </div>
       <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
         
         
-          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">链接为空</a>
+          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">No Links</a>
         
       </div>
     </div>
@@ -174,7 +176,7 @@
   <style>#main article .mdui-card-content .center-block{display:block!important;margin-right:auto!important;margin-left:auto!important}</style>
   <article class="mdui-card mdui-m-b-5">
     <header class="mdui-card-media">
-      <img src="/images/random/material-16.png" style="max-height: 240px;">
+      <img src="/images/random/material-8.png" style="max-height: 240px;">
       <div class="mdui-card-media-covered">
         <div class="mdui-card-primary">
           <div class="mdui-card-primary-title">CTF Android逆向入门浅谈（二）</div>
@@ -199,25 +201,25 @@
           <button class="mdui-btn mdui-btn-icon mdui-text-color-white" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="mdui-icon material-icons">share</i></button>
           <ul class="mdui-menu" id="share_menu">
             <li class="mdui-menu-item">
-              <a href="http://service.weibo.com/share/share.php?appkey=&title=CTF Android逆向入门浅谈（二）&url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/&pic=http://blog.sorrowrain.com/images/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
+              <a href="http://service.weibo.com/share/share.php?appkey=&title=CTF Android逆向入门浅谈（二）&url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/&pic=http://blog.sorrowrain.com/images/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://twitter.com/intent/tweet?text=CTF Android逆向入门浅谈（二）&url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/&via=SorrowRain" target="_blank" class="mdui-ripple">分享到 Twitter</a>
+              <a href="https://twitter.com/intent/tweet?text=CTF Android逆向入门浅谈（二）&url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/&via=SorrowRain" target="_blank" class="mdui-ripple">Share to Twitter</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.facebook.com/sharer/sharer.php?u=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_blank" class="mdui-ripple">Share to Facebook</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://plus.google.com/share?url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_blank" class="mdui-ripple">分享到 Google+</a>
+              <a href="https://plus.google.com/share?url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_blank" class="mdui-ripple">Share to Google+</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/&title=CTF Android逆向入门浅谈（二）" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
+              <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/&title=CTF Android逆向入门浅谈（二）" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="http://connect.qq.com/widget/shareqq/index.html?site=SorrowRain的博客&title=CTF Android逆向入门浅谈（二）&pics=http://blog.sorrowrain.com/images/favicon.png&url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_blank" class="mdui-ripple">分享到 QQ</a>
+              <a href="http://connect.qq.com/widget/shareqq/index.html?site=SorrowRain的博客&title=CTF Android逆向入门浅谈（二）&pics=http://blog.sorrowrain.com/images/favicon.png&url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_blank" class="mdui-ripple">Share to QQ</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://telegram.me/share/url?url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/&text=CTF Android逆向入门浅谈（二）" target="_blank" class="mdui-ripple">分享到 Telegram</a>
+              <a href="https://telegram.me/share/url?url=http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/&text=CTF Android逆向入门浅谈（二）" target="_blank" class="mdui-ripple">Share to Telegram</a>
             </li>
           </ul>
         
@@ -238,11 +240,28 @@
 <p><img src="./bytecode_tree.png" alt="BytecodeTree"></p>
 <p>左上方的工程浏览器则是整个apk文件的架构，你可以查看Manifest，签名详情，apk资源等</p>
 <p>当然，jeb的功能十分强大，随着学习的深入，你还会了解并使用到更多功能</p>
+<p>如果你找不到jeb，或者无法配置环境，也可以选择JADX-GUI，同样是一款dex的反编译工具，功能没那么强大就是了</p>
+<hr>
+<h2 id="二-开始逆向"><a href="#二-开始逆向" class="headerlink" title="二. 开始逆向"></a>二. 开始逆向</h2><p>在开始逆向前，我推荐下载apk并安装到手机上。如果你恰好是ios用户……请选择虚拟机</p>
+<p>在Bytecode层级树中找到MainActivity，我们的逆向就此开始</p>
+<p>……什么？不知道怎么找，好吧，这确实是个问题</p>
+<p>把上面的图片拉下来，我们再来看看</p>
+<hr>
+<p><img src="./bytecode_tree.png" alt="BytecodeTree2"></p>
+<p>在这个层级树中，android、androidx都是开发者使用的安卓库，不可或缺</p>
+<p>com.google.material是material库，google为开发者提供了这个库，以便更方便的实现Material Design（mdyyds！）</p>
+<p>kotlin则说明开发者使用了kt进行编写，kt的反编译结果和java不太一样，但区别不大</p>
+<p>那么如何找到我们的逆向起点MainActivity呢？这时manifest文件就起到了作用，在工程浏览器上打开manifest文件，如图</p>
+<p><img src="./manifest.png" alt="Manifest"></p>
+<p><code>package=&quot;&quot;</code>是当前apk的包名</p>
+<p>下方的MainActivity带有MAIN和LAUNCHER标签，说明该Activity是这个apk的主函数和启动界面，也就是从手机桌面上打开软件时启动的那个界面</p>
+<p>注意，不一定所有带有MAIN和LAUNCHER的Activity都叫MainActivity，我完全可以起其他名字，所以先看manifest往往是正确的选择</p>
+<p>这个方法适用于大部分apk，你可以拿出一道ctf题目试一试</p>
 
       
       <blockquote>
         
-        <strong>本文链接：</strong><br><a href="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/">http://blog.sorrowrain.com/CTF Android逆向入门浅谈（二）/</a>
+        <strong>PermaLink: </strong><br><a href="http://blog.sorrowrain.com/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%BA%8C%EF%BC%89/">http://blog.sorrowrain.com/CTF Android逆向入门浅谈（二）/</a>
       </blockquote>
     </div>
     <footer class="mdui-card-actions">
@@ -264,8 +283,8 @@
     
     <div class="spacer"></div>
     
-      <a rel="next" class="extend next" href="/CTF%20Android%E9%80%86%E5%90%91%E5%85%A5%E9%97%A8%E6%B5%85%E8%B0%88%EF%BC%88%E4%B8%80%EF%BC%89/">
-        <span class="mdui-p-x-3" mdui-tooltip="{content: 'CTF Android逆向入门浅谈（一）'}">下一篇</span>
+      <a rel="next" class="extend next" href="/helloworld/">
+        <span class="mdui-p-x-3" mdui-tooltip="{content: '开张！'}">Next</span>
         <button aria-label="next" class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_forward</i></button>
       </a>
     
